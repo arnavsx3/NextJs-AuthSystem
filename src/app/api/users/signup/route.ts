@@ -11,11 +11,11 @@ connectDB();
 export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
-    const { username, email, password } = reqBody;
     const result = zodSignupSchema.safeParse(reqBody);
     if (!result.success) {
       return NextResponse.json({ error: result.error.issues }, { status: 400 });
     }
+    const { username, email, password } = result.data;
     const existingUser = await userModel.findOne({
       $or: [{ email }, { username }],
     });

@@ -1,6 +1,7 @@
 "use client";
 
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, useEffect, ReactNode } from "react";
+import { getMe } from "../services/auth-services";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -11,6 +12,10 @@ export interface SignupParams {
   email: string;
   password: string;
 }
+export interface LoginParams {
+  username: string;
+  password: string;
+}
 // for user stored in context
 export interface User {
   _id: string;
@@ -18,17 +23,35 @@ export interface User {
   email: string;
 }
 interface AuthContextType {
-  user: User | null; 
+  user: User | null;
   setUser: (user: User | null) => void;
   loading: boolean;
   setLoading: (loading: boolean) => void;
 }
 
-export const AuthContext = createContext<AuthContextType|undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(
+  undefined,
+);
 
-export const AuthProvider = ({ children }:AuthProviderProps) => {
-  const [user, setUser] = useState<User|null>(null);
+export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      setLoading(true);
+      try {
+        const response = await getMe();
+        setUser(response.user);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUser();
+  }, []);
+
   return (
     <AuthContext.Provider value={{ user, setUser, loading, setLoading }}>
       {children}

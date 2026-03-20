@@ -2,25 +2,31 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/src/hooks/authHook";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const { loading, handleLogin } = useAuth();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-  const router = useRouter()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    const success = await handleLogin(formData);
+    if(success) router.push("/");
   };
 
   return (
     <div className="min-h-screen bg-gray-800 text-white flex items-center justify-center">
       <div className="bg-gray-700 p-8 rounded-2xl shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">Login to your account</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">
+          Login to your account
+        </h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
@@ -66,4 +72,3 @@ export default function LoginPage() {
     </div>
   );
 }
-

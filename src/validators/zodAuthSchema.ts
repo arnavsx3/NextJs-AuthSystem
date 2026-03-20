@@ -9,7 +9,7 @@ export const zodSignupSchema = z.object({
   .regex(/[!@#$%^&*]/, "Must contain one special character"),
 });
 
-export const loginSchema = z.object({
+export const zodLoginSchema = z.object({
   username: z.string().min(3, "Username must be atleast 3 chars"),
   password: z
     .string()

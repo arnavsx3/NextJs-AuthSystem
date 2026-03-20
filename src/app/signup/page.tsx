@@ -19,7 +19,7 @@ export default function SignupPage() {
   const handleSubmit = async (e: React.SyntheticEvent):Promise<void> => {
     e.preventDefault();
     const success = await handleSignup(formData);
-    if(success) router.push("/")
+    if(success) router.push("/login")
   };
   return (
     <div className="min-h-screen bg-gray-800 text-white flex items-center justify-center">
