@@ -2,28 +2,29 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/src/hooks/authHook";
 
 export default function SignupPage() {
-  const router = useRouter()
+  const router = useRouter();
+  const { loading, handleSignup } = useAuth();
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
   });
 
-  const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
-    setFormData({...formData,[e.target.name]:e.target.value})
-  }
-  const handleSubmit = async (e: React.SyntheticEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (e: React.SyntheticEvent):Promise<void> => {
     e.preventDefault();
-    // API call will go here
+    const success = await handleSignup(formData);
+    if(success) router.push("/")
   };
   return (
     <div className="min-h-screen bg-gray-800 text-white flex items-center justify-center">
       <div className="bg-gray-700 p-8 rounded-2xl shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">
-          Create Account
-        </h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">Create Account</h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
