@@ -2,6 +2,7 @@
 
 import { createContext, useState, useEffect, ReactNode } from "react";
 import { getMe } from "../services/auth-services";
+import Loader from "../components/loader";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -54,7 +55,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   return (
     <AuthContext.Provider value={{ user, setUser, loading, setLoading }}>
-      {children}
+      {loading ? <Loader /> : children}
     </AuthContext.Provider>
   );
 };
