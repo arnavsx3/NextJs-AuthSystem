@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
           else resolve(result);
         })
         .end(buffer);
-        // write binary data on opened stream
+      // write binary data on opened stream
     });
     const { secure_url } = uploadResult as { secure_url: string };
 
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
       user: _id,
       photo: secure_url,
     });
-    
+
     const response = NextResponse.json(
       { message: "Photo uploaded successfully", photo },
       { status: 201 },

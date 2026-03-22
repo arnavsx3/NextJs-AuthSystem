@@ -21,6 +21,7 @@ const userSchema = new Schema(
     },
     profilePicture: {
       type: String,
+      default:"",
       trim: true,
     },
     isVerified: {
