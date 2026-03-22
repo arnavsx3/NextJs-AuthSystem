@@ -21,7 +21,6 @@ const userSchema = new Schema(
     },
     profilePicture: {
       type: String,
-      required: [true, "Profile photo is required"],
       trim: true,
     },
     isVerified: {
