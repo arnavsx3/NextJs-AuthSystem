@@ -1,7 +1,14 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import HeroSection from "../components/heroSection";
+
 export default function Home() {
+  const router = useRouter();
+
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <h1 className="text-2xl font-bold">Home Page</h1>
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col">
+      <HeroSection />
     </div>
   );
 }

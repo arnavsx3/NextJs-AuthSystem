@@ -19,6 +19,11 @@ const userSchema = new Schema(
       required: [true, "Password is required"],
       trim: true,
     },
+    profilePicture: {
+      type: String,
+      required: [true, "Profile photo is required"],
+      trim: true,
+    },
     isVerified: {
       type: Boolean,
       default: false,
