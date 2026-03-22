@@ -6,7 +6,7 @@ import { verifyToken } from "@/src/utils/verifyJwt";
 
 connectDB();
 
-interface JwtPayload {
+export interface JwtPayload {
   _id: string;
   username: string;
 }
