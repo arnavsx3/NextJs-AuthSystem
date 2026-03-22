@@ -23,6 +23,7 @@ export interface User {
   username: string;
   email: string;
   profilePicture: string;
+  createdAt: string;
 }
 interface AuthContextType {
   user: User | null;

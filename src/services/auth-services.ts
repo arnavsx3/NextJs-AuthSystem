@@ -43,3 +43,8 @@ export const getMe = async () => {
   const response = await api.get("/api/users/me");
   return response.data;
 };
+
+export const getUserByUsername = async (username: string) => {
+  const response = await api.get(`/api/users/${username}`);
+  return response.data;
+};

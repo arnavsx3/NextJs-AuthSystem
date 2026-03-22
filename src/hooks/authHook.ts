@@ -5,7 +5,13 @@ import {
   SignupParams,
   LoginParams,
 } from "../contexts/auth-context";
-import { login, signup, logout, getMe } from "../services/auth-services";
+import {
+  login,
+  signup,
+  logout,
+  getMe,
+  getUserByUsername,
+} from "../services/auth-services";
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -54,6 +60,15 @@ export const useAuth = () => {
     }
   };
 
+  const getUser = async (username: string) => {
+    try {
+      const response = await getUserByUsername(username);
+      return response.user;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     user,
     setUser,
@@ -62,5 +77,6 @@ export const useAuth = () => {
     handleSignup,
     handleLogin,
     handleLogout,
+    getUser,
   };
 };
