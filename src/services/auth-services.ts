@@ -48,3 +48,13 @@ export const getUserByUsername = async (username: string) => {
   const response = await api.get(`/api/users/${username}`);
   return response.data;
 };
+
+export const verifyEmail = async (token: string) => {
+  const response = await api.get(`/api/auth/verify?token=${token}`);
+  return response.data;
+};
+
+export const sendVerificationEmail = async () => {
+  const response = await api.post("/api/auth/sendVerification");
+  return response.data;
+};

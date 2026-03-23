@@ -23,6 +23,7 @@ export interface User {
   username: string;
   email: string;
   profilePicture: string;
+  isVerified:boolean
   createdAt: string;
 }
 interface AuthContextType {
