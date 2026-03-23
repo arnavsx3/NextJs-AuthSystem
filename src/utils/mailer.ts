@@ -9,9 +9,9 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sendMail = async (to: string, subject: string, text: string) => {
+export const sendMail = async (from:string, to: string, subject: string, text: string) => {
   await transporter.sendMail({
-    from: "noreply@cloudauth.com",
+    from,
     to,
     subject,
     text,

@@ -11,9 +11,10 @@ export async function POST(request: NextRequest) {
       );
     }
     await sendMail(
+      `${email}`,
       "admin@cloudauth.com",
       `CloudAuth Contact: ${name}`,
-      `From ${email} \n\n${message}`,
+      `${message}`,
     );
     const response = NextResponse.json(
       { message: "Message sent successfully" },
