@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
       );
     }
     await sendMail(
-      process.env.MAILTRAP_USER!,
+      "admin@cloudauth.com",
       `CloudAuth Contact: ${name}`,
       `From ${email} \n\n${message}`,
     );
@@ -19,7 +19,9 @@ export async function POST(request: NextRequest) {
       { message: "Message sent successfully" },
       { status: 200 },
     );
+    return response;
   } catch (error: any) {
+    console.log(error);
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
