@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
       "noreply@cloudAuth.com",
       user.email,
       "Verify your CloudAuth email",
-      `Click the link to verify your email: ${verifyUrl}\n\nThis link expires in 1 hour.`,
+      `Click the link to verify your email: \n${verifyUrl}\n\nThis link expires in 1 hour.`,
     );
 
     const response = NextResponse.json(

@@ -14,10 +14,9 @@ export default function VerifyPage() {
 
   const { user, setUser } = useAuth();
 
-  const [message, setMessage] = useState("Verifying your email...");
+  const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
   const [sending, setSending] = useState(false);
-  const [sendMessage, setSendMessage] = useState("");
 
   useEffect(() => {
     if (!token) {
@@ -40,12 +39,9 @@ export default function VerifyPage() {
 
   const handleSendVerification = async () => {
     setSending(true);
-    setSendMessage("");
     try {
       const response = await sendVerificationEmail();
-      setSendMessage(response.message);
     } catch (error: any) {
-      setSendMessage("Failed to send email. Try again.");
       console.log(error);
     } finally {
       setSending(false);
@@ -88,9 +84,6 @@ export default function VerifyPage() {
               className="bg-blue-600 text-white rounded-lg py-2 text-sm font-semibold hover:bg-blue-700 transition disabled:opacity-50">
               {sending ? "Sending..." : "Send Verification Email"}
             </button>
-            {sendMessage && (
-              <p className="text-sm text-center text-gray-400">{sendMessage}</p>
-            )}
           </div>
         )}
       </div>
