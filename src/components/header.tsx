@@ -1,9 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useAuth } from "../hooks/authHook";
 
 export default function Header() {
   const router = useRouter();
+  const {user} = useAuth()
 
   return (
     <nav className="flex items-center justify-between px-8 py-4 border-b border-gray-800 bg-gray-900">
@@ -14,6 +16,11 @@ export default function Header() {
       </h1>
 
       <div className="flex items-center gap-6">
+        <span
+          onClick={() => router.push("/profile")}
+          className="text-sm text-gray-300 hover:text-white cursor-pointer transition">
+          Profile
+        </span>
         <span
           onClick={() => router.push("/premium")}
           className="text-sm text-gray-300 hover:text-white cursor-pointer transition">
